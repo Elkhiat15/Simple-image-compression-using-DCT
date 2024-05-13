@@ -98,8 +98,9 @@ def compressImage(m, show_imgs=False):
 
 def calculate_psnr(original_image, decompressed_image):
     """ calculate psnr value between two images """
-    return cv2.PSNR(original_image, decompressed_image)
-
+    mse = np.mean((original_image - decompressed_image) ** 2)
+    psnr = 10 * np.log10(255 ** 2 / mse)
+    return psnr
 
 # to show image
 compressed_image, decompressed_image = compressImage(m=2, show_imgs=True)
